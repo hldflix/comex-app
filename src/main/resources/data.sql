@@ -1,0 +1,1 @@
+INSERT INTO CATEGORIA (nome, ativo) VALUES ('Roupas', true);

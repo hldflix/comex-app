@@ -1,31 +1,38 @@
 package br.com.alura.comex.model;
 
+
+import br.com.alura.comex.model.dto.CadastroCategoriaRequest;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.Valid;
+import lombok.*;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Categoria {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
+
+    @Getter
+    @Setter
     private String nome;
 
-    public Long getId() {
-        return id;
-    }
+    @Getter
+    @Setter
+    private Boolean ativo;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Categoria(CadastroCategoriaRequest dados) {
 
-    public String getNome() {
-        return nome;
-    }
+        this.nome = dados.nome();
+        this.ativo = dados.ativo();
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @Override
-    public String toString() {
-        return "Categoria{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
     }
 }

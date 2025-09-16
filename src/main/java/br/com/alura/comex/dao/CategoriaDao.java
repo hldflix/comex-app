@@ -17,7 +17,7 @@ public class CategoriaDao {
     }
 
     public List<Categoria> listaTodos() {
-        String sql = "select * from categorias";
+        String sql = "select * from CATEGORIA";
 
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {
             ResultSet resultSet = comando.executeQuery();
@@ -38,6 +38,7 @@ public class CategoriaDao {
         Categoria categoria = new Categoria();
         categoria.setId(resultSet.getLong("id"));
         categoria.setNome(resultSet.getString("nome"));
+        categoria.setAtivo(resultSet.getBoolean("ativo"));
 
         return categoria;
     }

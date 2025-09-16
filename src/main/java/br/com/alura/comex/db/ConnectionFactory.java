@@ -11,9 +11,9 @@ public class ConnectionFactory {
         String senha = "";
 
         try {
-            String url = "jdbc:h2:./comex;;DB_CLOSE_ON_EXIT=FALSE;"
-                    //   + "INIT=runscript from './schema.sql'\\;"
-                    //   + "runscript from './data.sql'"
+            String url = "jdbc:h2:mem:comexdb;;DB_CLOSE_ON_EXIT=FALSE;"
+                       /*+ "INIT=runscript from './schema.sql'"
+                       + "runscript from './data.sql'"*/
                     ;
             
             return DriverManager.getConnection(url, usuario, senha);
