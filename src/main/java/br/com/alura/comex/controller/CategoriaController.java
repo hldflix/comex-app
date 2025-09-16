@@ -33,7 +33,7 @@ public class CategoriaController {
         System.out.println(dados);
 
         if(categoriaRepository.existsByNome(dados.nome())){
-            return new ResponseEntity<>("Test message error", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Categoria similar ou igual já cadastrada", HttpStatus.CONFLICT);
         }
 
         Categoria nova = new Categoria(dados);

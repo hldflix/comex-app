@@ -23,7 +23,7 @@ public class ProdutoDao {
         try (PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             comando.setString(1, produto.getNome());
             comando.setString(2, produto.getDescricao());
-            comando.setDouble(3, produto.getPreco());
+            comando.setBigDecimal(3, produto.getPreco());
 
             comando.execute();
             Long idGerado = DatabaseUtils.recuperaIdGerado(comando);
@@ -41,7 +41,7 @@ public class ProdutoDao {
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {
             comando.setString(1, produto.getNome());
             comando.setString(2, produto.getDescricao());
-            comando.setDouble(3, produto.getPreco());
+            comando.setBigDecimal(3, produto.getPreco());
             comando.setLong(4, produto.getId());
 
             comando.execute();
@@ -68,7 +68,7 @@ public class ProdutoDao {
         }
     }
 
-    public List<Produto> listaTodos() {
+    /*public List<Produto> listaTodos() {
         String sql = """
                 select produto.*, categoria.*
                   from produto
@@ -103,7 +103,7 @@ public class ProdutoDao {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao listar todos os produtos.", e);
         }
-    }
+    }*/
 
     private void excluiCategoriasProduto(Produto produto) {
         String sql = "delete from categoria_produto where produto_id = ?";
@@ -131,7 +131,7 @@ public class ProdutoDao {
         }
     }
 
-    public Produto consulta(long id) {
+    /*public Produto consulta(long id) {
         String sql = """
                 select produto.*, categoria.*
                   from produto
@@ -163,7 +163,7 @@ public class ProdutoDao {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao consultar produto.", e);
         }
-    }
+    }*/
 
     private Categoria monta(Long categoriaId, ResultSet resultSet) throws SQLException {
         Categoria categoria = new Categoria();
@@ -178,7 +178,7 @@ public class ProdutoDao {
         produto.setId(resultSet.getLong("produto.id"));
         produto.setNome(resultSet.getString("produto.nome"));
         produto.setDescricao(resultSet.getString("produto.descricao"));
-        produto.setPreco(resultSet.getDouble("produto.preco"));
+        produto.setPreco(resultSet.getBigDecimal("produto.preco"));
 
         return produto;
     }
